@@ -1,10 +1,8 @@
-import 'dart:convert';
-
 import 'package:code_weather/models/weather_model.dart';
 import 'package:dio/dio.dart';
 
 class WeatherApi {
-  Future<Weather?> getCurrentWeather(String? location) async {
+  Future<CurrentWeather?> getCurrentWeather(String? location) async {
     try {
       // print(location);
       var endpoint =
@@ -17,9 +15,9 @@ class WeatherApi {
       // print(body);
 
       // print(Weather.fromJson(body).cityName);
-      return Weather.fromJson(body);
-    } catch (e) {
-      print(e);
+      return CurrentWeather.fromJson(body);
+    } catch (err) {
+      print(err);
     }
   }
 }

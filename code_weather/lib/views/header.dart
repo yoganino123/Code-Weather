@@ -8,7 +8,7 @@ Widget header(String cityName) {
     // color: Colors.red,
     decoration: const BoxDecoration(
       shape: BoxShape.rectangle,
-      color: Colors.grey,
+      color: Color.fromARGB(255, 20, 20, 20),
     ),
 
     child: Column(
@@ -33,7 +33,7 @@ Widget header(String cityName) {
                 ),
               ],
             ),
-            Icon(
+            const Icon(
               Icons.place,
               color: Colors.white,
             ),

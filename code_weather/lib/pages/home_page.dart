@@ -16,7 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   // DIO API
   WeatherApi client = WeatherApi();
-  Weather? data;
+  CurrentWeather? data;
 
   Future<void> getData() async {
     data = await client.getCurrentWeather("jakarta");
@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey,
+        backgroundColor: const Color.fromARGB(255, 20, 20, 20),
         // appBar: AppBar(
         //   backgroundColor: Colors.grey,
         //   elevation: 0.0,
@@ -45,35 +45,27 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(
                     height: 20.0,
                   ),
-                  header('${data!.cityName}'),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  currentWeather(Icons.wb_sunny_rounded, "${data!.temp} °C",
-                      "Feels like ${data!.feelsLike} °C"),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  const Text(
-                    "No precipation within an hour",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  header('${data!.name}'),
+                  currentWeather(
+                      Icons.wb_sunny_rounded,
+                      "${data!.main!.temp!.round()}°C",
+                      "Feels like ${data!.main!.feelsLike!.round()}°C",
+                      "${data!.weather![0].main}",
+                      "${data!.weather![0].description}"),
                   const SizedBox(
                     height: 20.0,
                   ),
                   additionalInformation(
-                      "${data!.wind} m/s",
-                      "${data!.humidity}%",
-                      "${data!.pressure}hPa",
+                      "${data!.wind!.speed} m/s",
+                      "${data!.main!.humidity}%",
+                      "${data!.main!.pressure} hPa",
                       "${data!.visibility} m")
                 ],
               );
-            } else {
-              return const Text("API Belum terpanggil");
+            } else if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
             }
             return Container();
           },

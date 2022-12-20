@@ -20,19 +20,20 @@ Widget additionalInformation(
 ) {
   return Container(
     width: double.infinity,
+    margin: const EdgeInsets.all(18.0),
     padding: const EdgeInsets.all(18.0),
     // color: Colors.red,
     decoration: const BoxDecoration(
       borderRadius: BorderRadius.all(Radius.circular(10)),
       shape: BoxShape.rectangle,
-      color: Colors.blueGrey,
+      color: Colors.white10,
     ),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Column(
@@ -40,48 +41,14 @@ Widget additionalInformation(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Wind:",
+                  "Wind: $wind",
                   style: titleFont,
                 ),
                 const SizedBox(
                   height: 18.0,
                 ),
                 Text(
-                  "Pressure:",
-                  style: titleFont,
-                )
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  wind,
-                  style: dataFont,
-                ),
-                const SizedBox(
-                  height: 18.0,
-                ),
-                Text(
-                  pressure,
-                  style: dataFont,
-                )
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Humidity:",
-                  style: titleFont,
-                ),
-                const SizedBox(
-                  height: 18.0,
-                ),
-                Text(
-                  "Visibility:",
+                  "Pressure: $pressure",
                   style: titleFont,
                 )
               ],
@@ -91,15 +58,15 @@ Widget additionalInformation(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  humidity,
-                  style: dataFont,
+                  "Humidity: $humidity",
+                  style: titleFont,
                 ),
                 const SizedBox(
                   height: 18.0,
                 ),
                 Text(
-                  visibility,
-                  style: dataFont,
+                  "Visibility: $visibility",
+                  style: titleFont,
                 )
               ],
             ),
