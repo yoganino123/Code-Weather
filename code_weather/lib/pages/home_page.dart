@@ -1,4 +1,5 @@
 import 'package:code_weather/models/weather_model.dart';
+import 'package:code_weather/services/geolocator.dart';
 import 'package:code_weather/services/weather_api.dart';
 import 'package:code_weather/views/additional_information.dart';
 import 'package:code_weather/views/header.dart';
@@ -19,7 +20,16 @@ class _HomePageState extends State<HomePage> {
   CurrentWeather? data;
 
   Future<void> getData() async {
-    data = await client.getCurrentWeather("jakarta");
+    var long = await getLongitude();
+    var lat = await getLatitude();
+
+    data = await client.getCurrentWeather(long.toString(), lat.toString());
+  }
+
+  @override
+  void initState() {
+    getLongitude();
+    super.initState();
   }
 
   @override
@@ -45,21 +55,21 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(
                     height: 20.0,
                   ),
-                  header('${data!.name}'),
+                  header('${data?.name}'),
                   currentWeather(
                       Icons.wb_sunny_rounded,
-                      "${data!.main!.temp!.round()}°C",
-                      "Feels like ${data!.main!.feelsLike!.round()}°C",
-                      "${data!.weather![0].main}",
-                      "${data!.weather![0].description}"),
+                      "${data?.main?.temp?.round()}°C",
+                      "Feels like ${data?.main?.feelsLike?.round()}°C",
+                      "${data?.weather?[0].main}",
+                      "${data?.weather?[0].description}"),
                   const SizedBox(
                     height: 20.0,
                   ),
                   additionalInformation(
-                      "${data!.wind!.speed} m/s",
-                      "${data!.main!.humidity}%",
-                      "${data!.main!.pressure} hPa",
-                      "${data!.visibility} m")
+                      "${data?.wind?.speed} m/s",
+                      "${data?.main?.humidity}%",
+                      "${data?.main?.pressure} hPa",
+                      "${data?.visibility} m")
                 ],
               );
             } else if (snapshot.connectionState == ConnectionState.waiting) {
