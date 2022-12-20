@@ -7,7 +7,7 @@ class WeatherApi {
       // print(location);
       var endpoint =
           ("https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$long&appid=7826f23aa9bdcd3651458bab5f47fd65&units=metric");
-      print(endpoint);
+      // print(endpoint);
       var dio = Dio();
       var response = await dio.get(endpoint);
       // print(response);

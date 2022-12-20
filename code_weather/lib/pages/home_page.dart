@@ -2,7 +2,9 @@ import 'package:code_weather/models/weather_model.dart';
 import 'package:code_weather/services/geolocator.dart';
 import 'package:code_weather/services/weather_api.dart';
 import 'package:code_weather/views/additional_information.dart';
+import 'package:code_weather/views/day_weather.dart';
 import 'package:code_weather/views/header.dart';
+import 'package:code_weather/views/hour_weather.dart';
 import 'package:flutter/material.dart';
 
 import '../views/current_weather.dart';
@@ -62,14 +64,16 @@ class _HomePageState extends State<HomePage> {
                       "Feels like ${data?.main?.feelsLike?.round()}°C",
                       "${data?.weather?[0].main}",
                       "${data?.weather?[0].description}"),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
+                  // const SizedBox(
+                  //   height: 5.0,
+                  // ),
                   additionalInformation(
                       "${data?.wind?.speed} m/s",
                       "${data?.main?.humidity}%",
                       "${data?.main?.pressure} hPa",
-                      "${data?.visibility} m")
+                      "${data?.visibility} m"),
+                  hourWeather(),
+                  dayWeather(),
                 ],
               );
             } else if (snapshot.connectionState == ConnectionState.waiting) {
